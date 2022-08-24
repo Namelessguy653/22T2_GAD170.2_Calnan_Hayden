@@ -10,6 +10,7 @@ using UnityEngine;
 public class PowerLevel : MonoBehaviour
 {
     public StatsSystem myStats; // a reference to our stats system
+    int myPowerLevel;
 
     /// <summary>
     /// Used to generate a number of battle points that is used in combat.
@@ -22,7 +23,7 @@ public class PowerLevel : MonoBehaviour
         int myStyle = myStats.style;
         int myRhthm = myStats.rhythm;
 
-        myPowerLevel = 
+        myPowerLevel = myLuck + myStyle + myRhthm
 
         return 1; // instead of returning 0 we probably want to return our current power level
     }
@@ -39,6 +40,7 @@ public class PowerLevel : MonoBehaviour
         int totalPower = myPowerLevel + opponentPowerLevel;
 
         // Then let's then do a fraction of my power level and the overall power level.
+
         
         // This will give us a decimal number, i.e. 3/4 will give us 0.75 we probably want to turn that into the percentage value.
 

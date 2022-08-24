@@ -33,6 +33,9 @@ public class StatsSystem : MonoBehaviour
     public void GeneratePhysicalStatsStats()
     {
         // Let's set up agility, intelligence and strength to some default Random values.
+        agility = Random.Range(1, 5);
+        intelligence = Random.Range(1, 5);
+        strength = Random.Range(1, 5);
     }
 
     /// <summary>
@@ -53,10 +56,13 @@ public class StatsSystem : MonoBehaviour
         // now that we have some stats and our multiplier values let's calculate our style, luck and ryhtmn based on these values, hint your going to need to convert ints to floats, then floats to ints.
 
         // style should be based off our strength and be converted at a rate of 1 : 1.
+        style = (int)(strengthMultiplier * strength);
 
         // luck should be based off our intelligence and be converted at a rate of 1 : 1.5f
+        luck = (int)(intelligenceMultiplier * intelligence);
 
         // rhythm should be based off our agility and be converted at a rate of 1 : 0.5.
+        rhythm = (int)(agilityMultiplier * agility);
 
     }
 
@@ -69,7 +75,7 @@ public class StatsSystem : MonoBehaviour
         // We probably want to change our current health based on the amount coming in.
 
         // currently we are just automatically removing our player...but we probably only want to do that if there is a character and their health is less than 0.
-        if(character != null)
+        if(character != 0)
         {
             character.RemoveFromTeam();
         }

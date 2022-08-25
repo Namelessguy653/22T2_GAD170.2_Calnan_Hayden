@@ -58,9 +58,37 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    #region No Modifications Required
     // This is where we can handle what happens when we win or lose.
     public void FightOver()
+    {
+        StartCoroutine(HandleFightOvers());
+    }
+
+    /// <summary>
+    /// Used to Request A round.
+    /// </summary>
+    public void RequestRoundStart()
+    {
+        //calling the coroutine so we can put waits in for anims to play
+        StartCoroutine(DoRound());
+    }
+
+    /// <summary>
+    /// Handles the end of a fight and waits to start the next round.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator HandleFightOvers()
+    {
+        yield return new WaitForSeconds(fightCompletedWaitTime);
+        teamA.DisableWinEffects();
+        teamB.DisableWinEffects();
+        RequestRoundStart();
+
+    }
+
+    #region No Modifications Required
+    // This is where we can handle what happens when we win or lose.
+    public void FightOvers()
     {
         StartCoroutine(HandleFightOver());
     }

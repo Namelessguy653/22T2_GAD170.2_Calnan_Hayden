@@ -23,9 +23,7 @@ public class PowerLevel : MonoBehaviour
         int myStyle = myStats.style;
         int myRhthm = myStats.rhythm;
 
-        myPowerLevel = myLuck + myStyle + myRhthm
-
-        return 1; // instead of returning 0 we probably want to return our current power level
+        return ((myLuck) + (myStyle) + (myRhthm)); // instead of returning 0 we probably want to return our current power level
     }
 
     /// <summary>
@@ -34,29 +32,19 @@ public class PowerLevel : MonoBehaviour
     /// <param name="myPowerLevel"></param>
     /// <param name="opponentPowerLevel"></param>
     /// <returns></returns>
-    public float ReturnChanceToWin(int myPowerLevel,int opponentPowerLevel)
+    public float ReturnChanceToWin(int myPowerLevel, int opponentPowerLevel)
     {
         // let's first calculate the total power level overall.
         int totalPower = myPowerLevel + opponentPowerLevel;
 
         // Then let's then do a fraction of my power level and the overall power level.
-
-        
+        int myChanceToWin = (myPowerLevel / totalPower);
         // This will give us a decimal number, i.e. 3/4 will give us 0.75 we probably want to turn that into the percentage value.
+        decimal amt = myChanceToWin;
+        //myChanceToWin = (Value.ToString) * 100 + ("%"); 
+        //double value = myChanceToWin; string result = value.ToString("P")
+        //Frankly I am very stuck here
 
-        return 0; // Instead of returning 0 here we probably want to return our percentage chance to win.
+        return myChanceToWin; // Instead of returning 0 here we probably want to return our percentage chance to win.
     }
-
-    #region NoModificationsRequired
-    public void TestImplementation()
-    {
-        int opponentPower = Random.Range(0, 20);
-        int myPowerLevel = ReturnMyDancePowerLevel();
-          
-        float myChanceToWin = ReturnChanceToWin(myPowerLevel, opponentPower);
-        float myOpponentChanceToWin = ReturnChanceToWin(opponentPower, myPowerLevel);
-
-        Debug.Log(string.Format("My power is {0}, my opponents powerlevel is {1}, my chance to win is {2}% and my opponents is {3}%", myPowerLevel, opponentPower, myChanceToWin, myOpponentChanceToWin));
-    }
-    #endregion
 }

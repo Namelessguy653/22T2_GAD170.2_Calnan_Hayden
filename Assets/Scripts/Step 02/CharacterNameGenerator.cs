@@ -31,7 +31,25 @@ public class CharacterNameGenerator : MonoBehaviour
     public void CreateNames()
     {
         // So here we would ideally want to be able to add some names to our first names, last names and nick names lists.
+        firstNames.Add("Bill");
+        firstNames.Add("Dill");
+        firstNames.Add("Till");
+        firstNames.Add("Ill");
+        firstNames.Add("Fill");
 
+
+        lastNames.Add("Doe");
+        lastNames.Add("Poe");
+        lastNames.Add("Loe");
+        lastNames.Add("Toe");
+        lastNames.Add("Roe");
+
+        nicknames.Add("King of the Swag");
+        nicknames.Add("Boogy Freak");
+        nicknames.Add("The Imagine Dragon");
+        nicknames.Add("Jesus H Christ");
+        nicknames.Add("Mojo Dojo");
+      
     }
 
     /// <summary>
@@ -41,9 +59,8 @@ public class CharacterNameGenerator : MonoBehaviour
     public void SetIndividualCharacter(CharacterName character)
     {
         // So here rather than each character being called Blanky Blank Blank, we probably want it to be a random first,last and nickname
-
+        string CharacterName = firstNames[Random.Range(0, firstNames.Count)] + lastNames[Random.Range(0, lastNames.Count)] + nicknames[Random.Range(0, nicknames.Count)];
     }
-
     /// <summary>
     /// sets a character name for each member of a team, this is in our part 03
     /// </summary>
@@ -52,8 +69,12 @@ public class CharacterNameGenerator : MonoBehaviour
     public void SetTeamCharacterNames(List<CharacterName> teamCharacters)
     {
         // so here we have a list of character names coming in.
-        // we should probably loop over that list of charcter names, and then for each chacter set thei first, last and nickname a random one from our lists
+        // we should probably loop over that list of charcter names, and then for each chacter set their first, last and nickname a random one from our lists
         // if you want to get fancy you could use another function within this script to help out here.
-
+        for (int i = 0; i < firstNames.Count; i++)
+        {
+            firstNames[i] = firstNames[Random.Range(0, 5)];
+            // This should give a random range within the string right?
+        }
     }
 }

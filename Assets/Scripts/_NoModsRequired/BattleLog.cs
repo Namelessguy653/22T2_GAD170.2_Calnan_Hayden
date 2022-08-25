@@ -53,4 +53,9 @@ public class BattleLog : MonoBehaviour
         yield return new WaitForEndOfFrame();
         instance.scrollRect.normalizedPosition = new Vector2(0, 0);
     }
+
+    internal static void Log(string v)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -75,12 +75,6 @@ public class DanceTeam : MonoBehaviour
     {
         // so here we have a dancer coming in, we should probably remove them from our active dancers list.
     }
-
-    #region No mods Required
-    /// <summary>
-    /// Sets the team's troupe name to something we pass in.
-    /// </summary>
-    /// <param name="name"></param>
     public void SetTroupeName(string name)
     {
         danceTeamName = name;
@@ -111,6 +105,48 @@ public class DanceTeam : MonoBehaviour
     /// Disables the win effects for the winner/dancing team.
     /// </summary>
     public void DisableWinEffects()
+    {
+        if (fightWinContainer != null)
+        {
+            fightWinContainer.SetActive(false);
+        }
+    }
+
+    #region No mods Required
+    /// <summary>
+    /// Sets the team's troupe name to something we pass in.
+    /// </summary>
+    /// <param name="name"></param>
+    public void SetTroupeNames(string name)
+    {
+        danceTeamName = name;
+        if (troupeNameText != null)
+        {
+            troupeNameText.text = name;
+        }
+    }
+
+
+    /// <summary>
+    /// Enables the win effects for the winning dancer/team
+    /// </summary>
+    public void EnableWinEffect()
+    {
+        if (fightWinContainer != null)
+        {
+            fightWinContainer.SetActive(true);
+            var l = fightWinContainer.GetComponentInChildren<Light>();
+            if (l != null)
+            {
+                l.color = teamColor;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Disables the win effects for the winner/dancing team.
+    /// </summary>
+    public void DisableWinEffect()
     {
         if (fightWinContainer != null)
         {

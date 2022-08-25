@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,11 +28,18 @@ public class FightManager : MonoBehaviour
         int playerOnePowerLevel = teamACharacter.myPowerSystem.ReturnMyDancePowerLevel();
         int playerTwoPowerLevel = teamBCharacter.myPowerSystem.ReturnMyDancePowerLevel();
 
-
         // We should probably determine here who has won, and who has lost by comparing their power levels.
         // we should also do some damage or heal the appropriate characters.
         // we could also give them some XP if we want to. 
         // so we have the character class, which means any variables,references and functions we can access.
+        if (playerOnePowerLevel > playerTwoPowerLevel)
+        {
+            BattleLog.Log("Team A wins");
+        }
+        else if (playerTwoPowerLevel > playerOnePowerLevel)
+        {
+            BattleLog.Log("Team B wins");
+        }
 
         // By default it will automatically be a draw.
         string battleMessage = teamACharacter.charName.GetFullCharacterName() + " " + teamBCharacter.charName.GetFullCharacterName() + " fight is a draw";
@@ -41,16 +49,10 @@ public class FightManager : MonoBehaviour
         BattleLog.Log("team B draw", teamBColour);
         // here we are just telling the system who has won, and who has lost; for any other result other than a draw we should probably pass in false.
         FightCompleted(teamBCharacter, teamACharacter, true);
-        
+
     }
 
-
-    #region No Modifications Required.
-
-    ///// <summary>
     ///// Sets up a dancer to be selected and the animation to start dancing.
-    ///// </summary>
-    ///// <param name="dancer"></param>
     private void SetUpAttack(Character dancer)
     {
         dancer.isSelected = true;
@@ -61,11 +63,7 @@ public class FightManager : MonoBehaviour
         }
     }
 
-    /// <summary>
     /// When a character is chosen, let them know they are selected, and make them dance.
-    /// </summary>
-    /// <param name="character"></param>
-    /// <param name="teamColor"></param>
     private void DisplaySelected(Character character, Color teamColor)
     {
         character.isSelected = true;
@@ -76,15 +74,11 @@ public class FightManager : MonoBehaviour
         }
     }
 
-    /// <summary>
     /// just checks to see if they've been assigned a team, if yes then use their color;
     /// otherwise just set A to be red, and B to be blue.
-    /// </summary>
-    /// <param name="teamA"></param>
-    /// <param name="teamB"></param>
     private void GetTeamColours(Character teamA, Character teamB)
     {
-        if(teamA.myTeam)
+        if (teamA.myTeam)
         {
             teamAColour = teamA.myTeam.teamColor;
         }
@@ -93,7 +87,7 @@ public class FightManager : MonoBehaviour
             teamAColour = Color.red;
         }
 
-        if(teamB.myTeam)
+        if (teamB.myTeam)
         {
             teamBColour = teamB.myTeam.teamColor;
         }
@@ -103,11 +97,8 @@ public class FightManager : MonoBehaviour
         }
     }
 
-    /// <summary>
+    
     /// This is called when we want to start a fight between two charcters it then intiialises the corouinte.
-    /// </summary>
-    /// <param name="teamACharacter"></param>
-    /// <param name="teamBCharacter"></param>
     public void Fight(Character teamACharacter, Character teamBCharacter)
     {
         if (fightRoutine == null)
@@ -118,12 +109,8 @@ public class FightManager : MonoBehaviour
         }
     }
 
-    /// <summary>
     /// This handles the actual round and them fighting etc, setting up animations etc.
-    /// </summary>
-    /// <param name="teamACharacter"></param>
-    /// <param name="teamBCharacter"></param>
-    /// <returns></returns>
+
     private IEnumerator StartFight(Character teamACharacter, Character teamBCharacter)
     {
         DisplaySelected(teamACharacter, teamAColour);
@@ -139,19 +126,14 @@ public class FightManager : MonoBehaviour
         yield return null;
     }
 
-    /// <summary>
     /// Passes in a winning character, and a defeated character, as well as the outcome 
-    /// </summary>
-    /// <param name="winner"></param>
-    /// <param name="defeated"></param>
-    /// <param name="outcome"></param>
     private void FightCompleted(Character winner, Character defeated, bool isDraw)
     {
         winner.isSelected = false;
         defeated.isSelected = false;
         fightRoutine = null;
-        
-        winner.animController.BattleResult(winner, defeated, isDraw? 0:1);
+
+        winner.animController.BattleResult(winner, defeated, isDraw ? 0 : 1);
         defeated.animController.BattleResult(winner, defeated, isDraw ? 0 : 1);
 
         battleSystem = FindObjectOfType<BattleSystem>();
@@ -168,5 +150,7 @@ public class FightManager : MonoBehaviour
         Fight(allCharacter[0], allCharacter[1]);
     }
 
-     #endregion  
+    //Thank you so much Max youre a life saver!
+
 }
+
